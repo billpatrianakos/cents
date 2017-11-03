@@ -1,2 +1,3 @@
-# cents
+# Cents
+
 Simple budgeting software

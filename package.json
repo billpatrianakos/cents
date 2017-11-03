@@ -1,0 +1,28 @@
+{
+  "name": "cents",
+  "version": "1.0.0",
+  "description": "Simple budgeting software",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billpatrianakos/cents.git"
+  },
+  "keywords": [
+    "budgeting",
+    "accounting",
+    "money"
+  ],
+  "author": "Bill Patrianakos <bill@billpatrianakos.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/billpatrianakos/cents/issues"
+  },
+  "homepage": "https://github.com/billpatrianakos/cents#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "mocha": "^4.0.1"
+  }
+}
