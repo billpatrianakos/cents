@@ -9,7 +9,9 @@ const gulp    = require('gulp'),
       jshint  = require('gulp-jshint'),
       pump    = require('pump'),
       uglify  = require('gulp-uglify'),
-      gls     = require('gulp-live-server');
+      gls     = require('gulp-live-server'),
+      less    = require('gulp-less'),
+      cssmin  = require('gulp-cssmin');
 
 
 // Lint JavaScript
@@ -34,6 +36,12 @@ gulp.task('uglify', (cb) => {
 
 // Transpile LESS
 // --------------
+gulp.task('less', () => {
+  return gulp.src('./src/assets/less/style.less')
+          .pipe(less())
+          .pipe(cssmin())
+          .pipe(gulp.dest('./src/public/css'));
+});
 
 
 // Start a server
@@ -52,9 +60,13 @@ gulp.task('server', () => {
 });
 
 
-// Watch files
-gulp.watch(['gulpfile.js', './src/assets/js/*.js'], ['lint', 'uglify']);
+// Watch files and take actions on changes
+// ---------------------------------------
+gulp.task('watch', () => {
+  gulp.watch(['gulpfile.js', './src/assets/js/*.js'], ['lint', 'uglify']);
+  gulp.watch(['./src/assets/less/style.less'], ['less']);
+});
 
 
 // Default tasks
-gulp.task('default', ['lint']);
+gulp.task('default', ['watch', 'server']);
