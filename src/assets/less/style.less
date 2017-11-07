@@ -9,13 +9,17 @@
  * middle, then mobile styles at the end.
  */
 
-::selection { background: @orange; color: @white; }
+// CSS Reset (Normalize.css)
+// =========================
+@import (inline) '../../../node_modules/normalize.css/normalize.css';
+
+// Signature style
+// ---------------
+::selection     { background: @orange; color: @white; }
 ::moz-selection { background: @orange; color: @white; }
 
 // Baseline styles
 // ===============
-// Normalize.css is pulled in at
-// build time using a copy from Bower
 @import 'modules/colors';     // Global color scheme
 @import 'modules/mixins';     // Mixins
 @import 'modules/grid';       // Baseline grid
