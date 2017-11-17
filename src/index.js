@@ -5,10 +5,20 @@
 // Load dependencies
 // -----------------
 const express = require('express'),
-      app     = express();
+      app     = express(),
+      fs      = require('fs'),
+      morgan  = require('morgan');
 
 
-require('./controllers/index')(app)
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('combined')); // Log to console in dev mode
+} else {
+  app.set('trust proxy', true); // Trust proxy in production
+  app.use(morgan('combined', { stream: fs.createWriteStream(__dirname + '/log/app.log', { flags: 'a' }) })); // Write logs to file
+}
+
+require('./controllers/index')(app);
+
 // Test route
 // ----------
 app.get('/', (req, res, next) => {
