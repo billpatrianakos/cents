@@ -10,14 +10,23 @@ const express = require('express'),
       morgan  = require('morgan');
 
 
+// Configure server settings
+// -------------------------
 if (process.env.NODE_ENV === 'development') {
-  app.use(morgan('combined')); // Log to console in dev mode
+  // Local dev environment settings
+  app.use(morgan('combined'));    // Log to console in dev mode
 } else {
-  app.set('trust proxy', true); // Trust proxy in production
-  app.use(morgan('combined', { stream: fs.createWriteStream(__dirname + '/log/app.log', { flags: 'a' }) })); // Write logs to file
+  // Production and remote env settings
+  app.set('trust proxy', true);   // Trust proxy in production
+  app.use(morgan('combined', {    // Write logs to file
+    stream: fs.createWriteStream(__dirname + '/log/app.log', { flags: 'a' }) 
+  }));
 }
 
-require('./controllers/index')(app);
+
+// Auto-load all regular routes/controllers
+// ----------------------------------------
+require('./controllers')(app);
 
 // Test route
 // ----------
