@@ -7,13 +7,19 @@
 const express = require('express'),
       app     = express(),
       fs      = require('fs'),
+      _       = require('lodash'),
       morgan  = require('morgan');
 
 
-// Configure server settings
-// -------------------------
+// App configuration
+// -----------------
+
+
+// Middleware
+// ----------
+// Per-environment middleware and configuration
 if (process.env.NODE_ENV === 'development') {
-  // Local dev environment settings
+  // DEVELOPMENT 
   app.use(morgan('combined'));    // Log to console in dev mode
 } else {
   // Production and remote env settings
